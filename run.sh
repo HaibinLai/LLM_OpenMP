@@ -13,3 +13,6 @@ pip install transformers
 
 huggingface-cli login
 pip install 'accelerate>=0.26.0'
+
+git config --global user.email "hhh"
+git config --global user.name "hhh2"
