@@ -3,11 +3,16 @@ sudo apt update
 
 # conda
 wget https://repo.anaconda.com/archive/Anaconda3-2024.10-1-Linux-x86_64.sh
-bash Anaconda3-2024.10-1-Linux-x86_64.sh
+bash Anaconda3-2024.10-1-Linux-x86_64.sh # press yes!
+
+export PATH="/home/cc/anaconda3/bin:$PATH"
+conda init bash   # 如果你使用 bash
+
 conda create -n LLM_OMP 
 conda activate LLM_OMP
 
 # Pytorch
+sudo apt install python3-pip
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 export PATH="$PATH:/home/cc/.local/bin"
 pip install transformers
@@ -34,3 +39,6 @@ sudo sysctl -w kernel.yama.ptrace_scope=0
 # ssh -i C:\Users\11062\.ssh\Par2.pem -L 6005:localhost:6006 cc@129.114.108.223
 
 https://github.com/settings/keys
+
+# tar -czvf archive.tar.gz file1 file2 folder
+
