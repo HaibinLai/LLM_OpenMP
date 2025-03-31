@@ -1,0 +1,79 @@
+Intel(R) VTune(TM) Profiler Command Line Tool
+Copyright (C) 2009 Intel Corporation. All rights reserved.
+
+ Usage: vtune <-action> [-action-option] [-global-option] [[--] target [target options]]
+ 
+ Type 'vtune -help <action>' for help on a specific action.
+ 
+
+Available Actions:
+ 
+    collect        Choose an analysis type.
+    collect-with   Choose a collector.
+    command        Issue a command to a running collection.
+    finalize       Re-finalize the result.
+    help           Display help text.
+    import         Create a result directory by importing one or more legacy data files/directories.
+    report         Generate a report with the specified name.
+    version        Display product version.
+
+
+Additional Tools:
+ 
+    Application Performance Snapshot
+ 
+       Use Application Performance Snapshot to profile MPI-based applications and get MPI-specific performance insights.
+       Type aps --help to see relevant options.
+ 
+    VTune Profiler Server
+ 
+       Use VTune Profiler Server to view collected results in a web browser for a better user experience compared to VNC or X-forwarding.
+       Type vtune-backend --data-directory=/path/to/folder/with/collected/results.
+ 
+    Self-checker Script
+ 
+       This script checks if you have installed VTune Profiler correctly and ensures that it is ready for use.
+       Type vtune-self-checker.sh to run this script.
+ 
+
+Examples:
+ 
+ 1) Start with a performance snapshot. Get a quick overview of potential performance issues. Identify next steps for a deeper analysis:
+ 
+    vtune -collect performance-snapshot a.out
+ 
+ 2) Run a hotspots collection (in user-mode sampling) on the specified target:
+ 
+    vtune -collect hotspots a.out
+ 
+ 3) Run a hotspot collection (hardware event-based sampling) with non-default sampling interval 0.5 ms:
+ 
+    vtune -collect hotspots -knob sampling-mode=hw -knob sampling-interval=0.5 a.out
+ 
+ 4) Generate the hotspots report for the 'r000hs' result directory:
+ 
+    vtune -report hotspots -r r000hs
+ 
+ 5) Run microarchitecture exploration analysis as ‘vtune_user’ on a remote target with IP address 192.0.2.0:
+ 
+    vtune -target-system ssh:vtune_user@192.0.2.0 -collect uarch-exploration a.out
+ 
+ 6) Profile system with memory access analysis for 20 seconds:
+ 
+    vtune -collect memory-access -d 20
+ 
+ 7) Run gpu-hotspots collection on the process labeled PID 1234:
+ 
+    vtune -collect gpu-hotspots -target-pid 1234
+ 
+ 8) Run HPC performance characterization analysis on MPI application 'a.out' executed with Intel MPI Launcher:
+ 
+    mpirun -n 48 -ppn 24 vtune -collect hpc-performance -data-limit=0 -r my_result_dir a.out
+ 
+ 9) Show options for collect command:
+ 
+    vtune -help collect
+ 
+ 10) Show options for threading analysis:
+ 
+    vtune -help collect threading
